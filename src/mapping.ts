@@ -15,10 +15,11 @@ export function handleTransfer(ev: TransferEvent): void {
   const to = ev.params.to.toHex()
   const amt: BigInt = ev.params.amount
   const island = KodiakIslandWithRouter.bind(ev.address)
-  const balances = island.getUnderlyingBalances()
-  const totalIslandSupply = island.totalSupply()
-  const balance0PerIsland = balances[0] / Number(totalIslandSupply)
-  const balance1PerIsland = balances[1] / Number(totalIslandSupply)
+  // const balances = island.getUnderlyingBalances()
+  const balances: BigInt[] = [BigInt.fromI32(6), BigInt.fromI32(9)]
+  const totalIslandSupply: BigInt = island.totalSupply()
+  const balance0PerIsland = balances[0].div(totalIslandSupply)
+  const balance1PerIsland = balances[1].div(totalIslandSupply)
 
   if(from != ZERO_ADDRESS) {
     depositor = IslandDepositor.load(from)
@@ -26,11 +27,11 @@ export function handleTransfer(ev: TransferEvent): void {
       depositor = new IslandDepositor(from)
     }
     
-    const prevIslandAmt: any = depositor.islandAmt
+    const prevIslandAmt: BigInt = depositor.islandAmt
     depositor.address = from
-    depositor.islandAmt = new BigInt(prevIslandAmt - Number(amt))
-    depositor.dtAmt = new BigInt((prevIslandAmt - Number(amt)) * balance0PerIsland)
-    depositor.otAmt = new BigInt((prevIslandAmt - Number(amt)) * balance1PerIsland)
+    depositor.islandAmt = prevIslandAmt.minus(amt)
+    depositor.dtAmt = (prevIslandAmt.minus(amt)).times(balance0PerIsland)
+    depositor.otAmt = (prevIslandAmt.minus(amt)).times(balance1PerIsland)
     depositor.save()
   }
 
@@ -40,11 +41,11 @@ export function handleTransfer(ev: TransferEvent): void {
       depositor = new IslandDepositor(to)
     }
 
-    const prevIslandAmt: any = depositor.islandAmt
+    const prevIslandAmt: BigInt = depositor.islandAmt
     depositor.address = to
-    depositor.islandAmt = new BigInt(prevIslandAmt + amt)
-    depositor.dtAmt = new BigInt((prevIslandAmt + amt) * balance0PerIsland)
-    depositor.otAmt = new BigInt((prevIslandAmt + amt) * balance1PerIsland)
+    depositor.islandAmt = prevIslandAmt.plus(amt)
+    depositor.dtAmt = (prevIslandAmt.plus(amt)).times(balance0PerIsland)
+    depositor.otAmt = (prevIslandAmt.plus(amt)).times(balance1PerIsland)
     depositor.save()
   }
 }
