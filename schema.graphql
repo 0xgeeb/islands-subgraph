@@ -1,0 +1,8 @@
+type IslandDepositor @entity
+{
+  id:                           ID!
+  address:                      String!
+  islandAmt:                    BigInt!
+  dtAmt:                        BigInt!
+  otAmt:                        BigInt!
+}

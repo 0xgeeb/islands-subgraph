@@ -1,0 +1,26 @@
+specVersion: 0.0.2
+description: KodiakIslandWithRouter
+repository:
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: KodiakIslandWithRouter
+    network: {{ network }}
+    source:
+      address: "{{ address }}"
+      abi: KodiakIslandWithRouter
+      startBlock: {{ startBlock }}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - IslandDepositor
+      abis:
+        - name: KodiakIslandWithRouter
+          file: ./abis/{{ file }}.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mapping.ts

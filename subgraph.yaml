@@ -1,0 +1,26 @@
+specVersion: 0.0.4
+description: KodiakIslandWithRouter
+repository:
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: KodiakIslandWithRouter
+    network: berachain-mainnet
+    source:
+      address: "0xf8163EaC4c0239a81a7d8BD05B8e14498a5fD880"
+      abi: KodiakIslandWithRouter
+      startBlock: 266317
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      entities:
+        - IslandDepositor
+      abis:
+        - name: KodiakIslandWithRouter
+          file: ./abis/KodiakIslandWithRouter.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mapping.ts
