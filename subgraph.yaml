@@ -10,7 +10,7 @@ dataSources:
     source:
       address: "0xf8163EaC4c0239a81a7d8BD05B8e14498a5fD880"
       abi: KodiakIslandWithRouter
-      startBlock: 266317
+      startBlock: 237830
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -22,5 +22,25 @@ dataSources:
           file: ./abis/KodiakIslandWithRouter.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,uint256)
-          handler: handleTransfer
+          handler: handleIslandTransfer
+      file: ./src/mapping.ts
+  - kind: ethereum/contract
+    name: YieldToken
+    network: berachain-mainnet
+    source:
+      address: "0xfb8283E50c89e367674BC566db3070D9e9Ff2fDd"
+      abi: YieldToken
+      startBlock: 237830
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      entities:
+        - YTHolder
+      abis:
+        - name: YieldToken
+          file: ./abis/YieldToken.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleYTTransfer
       file: ./src/mapping.ts

@@ -1,11 +1,11 @@
 import { BigInt } from '@graphprotocol/graph-ts'
 import { KodiakIslandWithRouter__getUnderlyingBalancesResult, Transfer as TransferEvent } from '../generated/KodiakIslandWithRouter/KodiakIslandWithRouter'
 import { KodiakIslandWithRouter } from "../generated/KodiakIslandWithRouter/KodiakIslandWithRouter"
-import { IslandDepositor } from '../generated/schema'
+import { IslandDepositor, YTHolder } from '../generated/schema'
 
 const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000'
 
-export function handleTransfer(ev: TransferEvent): void {
+export function handleIslandTransfer(ev: TransferEvent): void {
   const from = ev.params.from.toHex()
   const to = ev.params.to.toHex()
   const amt: BigInt = ev.params.amount
@@ -53,5 +53,39 @@ export function handleTransfer(ev: TransferEvent): void {
     depositor.dtAmt = (prevIslandAmt.plus(amt)).times(balance0PerIsland)
     depositor.otAmt = (prevIslandAmt.plus(amt)).times(balance1PerIsland)
     depositor.save()
+  }
+}
+
+export function handleYTTransfer(ev: TransferEvent): void {
+  const from = ev.params.from.toHex()
+  const to = ev.params.to.toHex()
+  const amt: BigInt = ev.params.amount
+
+  if(from != ZERO_ADDRESS) {
+    let prevytAmt: BigInt
+    let holder: YTHolder | null
+    holder = YTHolder.load(from)
+    if(!holder) {
+      holder = new YTHolder(from)
+    }
+
+    prevytAmt = holder.ytAmt
+    holder.address = from
+    holder.ytAmt = prevytAmt.minus(amt)
+    holder.save()
+  }
+
+  if(to != ZERO_ADDRESS) {
+    let prevytAmt: BigInt
+    let holder: YTHolder | null
+    holder = YTHolder.load(to)
+    if(!holder) {
+      holder = new YTHolder(to)
+    }
+
+    prevytAmt = holder.ytAmt
+    holder.address = to
+    holder.ytAmt = prevytAmt.plus(amt)
+    holder.save()
   }
 }

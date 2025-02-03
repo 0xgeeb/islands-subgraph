@@ -104,3 +104,69 @@ export class IslandDepositor extends Entity {
     this.set("otAmt", Value.fromBigInt(value));
   }
 }
+
+export class YTHolder extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save YTHolder entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        `Entities of type YTHolder must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+      );
+      store.set("YTHolder", id.toString(), this);
+    }
+  }
+
+  static loadInBlock(id: string): YTHolder | null {
+    return changetype<YTHolder | null>(store.get_in_block("YTHolder", id));
+  }
+
+  static load(id: string): YTHolder | null {
+    return changetype<YTHolder | null>(store.get("YTHolder", id));
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toString();
+    }
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get address(): string {
+    let value = this.get("address");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toString();
+    }
+  }
+
+  set address(value: string) {
+    this.set("address", Value.fromString(value));
+  }
+
+  get ytAmt(): BigInt {
+    let value = this.get("ytAmt");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set ytAmt(value: BigInt) {
+    this.set("ytAmt", Value.fromBigInt(value));
+  }
+}

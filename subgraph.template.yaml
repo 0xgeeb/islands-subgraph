@@ -8,7 +8,7 @@ dataSources:
     name: KodiakIslandWithRouter
     network: {{ network }}
     source:
-      address: "{{ address }}"
+      address: "{{ island_address }}"
       abi: KodiakIslandWithRouter
       startBlock: {{ startBlock }}
     mapping:
@@ -19,8 +19,28 @@ dataSources:
         - IslandDepositor
       abis:
         - name: KodiakIslandWithRouter
-          file: ./abis/{{ file }}.json
+          file: ./abis/{{ island_file }}.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,uint256)
-          handler: handleTransfer
+          handler: handleIslandTransfer
+      file: ./src/mapping.ts
+  - kind: ethereum/contract
+    name: YieldToken
+    network: {{ network }}
+    source:
+      address: "{{ yt_address }}"
+      abi: YieldToken
+      startBlock: {{ startBlock }}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - YTHolder
+      abis:
+        - name: YieldToken
+          file: ./abis/{{ yt_file }}.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleYTTransfer
       file: ./src/mapping.ts

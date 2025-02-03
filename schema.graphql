@@ -6,3 +6,10 @@ type IslandDepositor @entity
   dtAmt:                        BigInt!
   otAmt:                        BigInt!
 }
+
+type YTHolder @entity
+{
+  id:                           ID!
+  address:                      String!
+  ytAmt:                        BigInt!
+}

@@ -1,6 +1,8 @@
 {
   "network": "berachain-mainnet",
-  "address": "0xf8163EaC4c0239a81a7d8BD05B8e14498a5fD880",
-  "startBlock": 266317,
-  "file": "KodiakIslandWithRouter"
+  "island_address": "0xf8163EaC4c0239a81a7d8BD05B8e14498a5fD880",
+  "yt_address": "0xfb8283E50c89e367674BC566db3070D9e9Ff2fDd",
+  "startBlock": 237830,
+  "island_file": "KodiakIslandWithRouter",
+  "yt_file": "YieldToken"
 }
