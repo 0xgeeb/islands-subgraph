@@ -16,13 +16,20 @@ dataSources:
       apiVersion: 0.0.5
       language: wasm/assemblyscript
       entities:
-        - IslandDepositor
+        - IslandHolder
+        - IslandBalances
       abis:
         - name: KodiakIslandWithRouter
           file: ./abis/{{ island_file }}.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleIslandTransfer
+        - event: Minted(address,uint256,uint256,uint256,uint128)
+          handler: handleBalanceChange
+        - event: Burned(address,uint256,uint256,uint256,uint128)
+          handler: handleBalanceChange
+        - event: Rebalance(indexed address,int24,int24,uint128,uint128)
+          handler: handleBalanceChange
       file: ./src/mapping.ts
   - kind: ethereum/contract
     name: YieldToken

@@ -11,7 +11,7 @@ import {
   BigDecimal
 } from "@graphprotocol/graph-ts";
 
-export class IslandDepositor extends Entity {
+export class IslandHolder extends Entity {
   constructor(id: string) {
     super();
     this.set("id", Value.fromString(id));
@@ -19,24 +19,24 @@ export class IslandDepositor extends Entity {
 
   save(): void {
     let id = this.get("id");
-    assert(id != null, "Cannot save IslandDepositor entity without an ID");
+    assert(id != null, "Cannot save IslandHolder entity without an ID");
     if (id) {
       assert(
         id.kind == ValueKind.STRING,
-        `Entities of type IslandDepositor must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+        `Entities of type IslandHolder must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
       );
-      store.set("IslandDepositor", id.toString(), this);
+      store.set("IslandHolder", id.toString(), this);
     }
   }
 
-  static loadInBlock(id: string): IslandDepositor | null {
-    return changetype<IslandDepositor | null>(
-      store.get_in_block("IslandDepositor", id)
+  static loadInBlock(id: string): IslandHolder | null {
+    return changetype<IslandHolder | null>(
+      store.get_in_block("IslandHolder", id)
     );
   }
 
-  static load(id: string): IslandDepositor | null {
-    return changetype<IslandDepositor | null>(store.get("IslandDepositor", id));
+  static load(id: string): IslandHolder | null {
+    return changetype<IslandHolder | null>(store.get("IslandHolder", id));
   }
 
   get id(): string {
@@ -76,32 +76,6 @@ export class IslandDepositor extends Entity {
 
   set islandAmt(value: BigInt) {
     this.set("islandAmt", Value.fromBigInt(value));
-  }
-
-  get dtAmt(): BigInt {
-    let value = this.get("dtAmt");
-    if (!value || value.kind == ValueKind.NULL) {
-      throw new Error("Cannot return null for a required field.");
-    } else {
-      return value.toBigInt();
-    }
-  }
-
-  set dtAmt(value: BigInt) {
-    this.set("dtAmt", Value.fromBigInt(value));
-  }
-
-  get otAmt(): BigInt {
-    let value = this.get("otAmt");
-    if (!value || value.kind == ValueKind.NULL) {
-      throw new Error("Cannot return null for a required field.");
-    } else {
-      return value.toBigInt();
-    }
-  }
-
-  set otAmt(value: BigInt) {
-    this.set("otAmt", Value.fromBigInt(value));
   }
 }
 
@@ -168,5 +142,73 @@ export class YTHolder extends Entity {
 
   set ytAmt(value: BigInt) {
     this.set("ytAmt", Value.fromBigInt(value));
+  }
+}
+
+export class IslandBalances extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save IslandBalances entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        `Entities of type IslandBalances must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+      );
+      store.set("IslandBalances", id.toString(), this);
+    }
+  }
+
+  static loadInBlock(id: string): IslandBalances | null {
+    return changetype<IslandBalances | null>(
+      store.get_in_block("IslandBalances", id)
+    );
+  }
+
+  static load(id: string): IslandBalances | null {
+    return changetype<IslandBalances | null>(store.get("IslandBalances", id));
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toString();
+    }
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get balance0(): BigInt {
+    let value = this.get("balance0");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set balance0(value: BigInt) {
+    this.set("balance0", Value.fromBigInt(value));
+  }
+
+  get balance1(): BigInt {
+    let value = this.get("balance1");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set balance1(value: BigInt) {
+    this.set("balance1", Value.fromBigInt(value));
   }
 }
