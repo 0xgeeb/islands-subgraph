@@ -169,7 +169,7 @@ export function handleRsethYTTransfer(ev: TransferEvent): void {
   }
 }
 
-export function UnibtcYTTransfer(ev: TransferEvent): void {
+export function handleUnibtcYTTransfer(ev: TransferEvent): void {
   const from = ev.params.from.toHex()
   const to = ev.params.to.toHex()
   const amt: BigInt = ev.params.amount
