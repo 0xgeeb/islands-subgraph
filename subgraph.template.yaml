@@ -10,7 +10,7 @@ dataSources:
     source:
       address: "{{ rseth_island_address }}"
       abi: KodiakIslandWithRouter
-      startBlock: {{ startBlock }}
+      startBlock: {{ rseth_island_startBlock }}
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -37,7 +37,7 @@ dataSources:
     source:
       address: "{{ rseth_yt_address }}"
       abi: YieldToken
-      startBlock: {{ startBlock }}
+      startBlock: {{ rseth_yt_startBlock }}
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -57,7 +57,7 @@ dataSources:
     source:
       address: "{{ unibtc_island_address }}"
       abi: KodiakIslandWithRouter
-      startBlock: {{ startBlock }}
+      startBlock: {{ unibtc_island_startBlock }}
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -84,7 +84,7 @@ dataSources:
     source:
       address: "{{ unibtc_yt_address }}"
       abi: YieldToken
-      startBlock: {{ startBlock }}
+      startBlock: {{ unibtc_yt_startBlock }}
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -104,7 +104,7 @@ dataSources:
     source:
       address: "{{ solvbtc_island_address }}"
       abi: KodiakIslandWithRouter
-      startBlock: {{ startBlock }}
+      startBlock: {{ solvbtc_island_startBlock }}
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
@@ -131,7 +131,7 @@ dataSources:
     source:
       address: "{{ solvbtc_yt_address }}"
       abi: YieldToken
-      startBlock: {{ startBlock }}
+      startBlock: {{ solvbtc_yt_startBlock }}
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5

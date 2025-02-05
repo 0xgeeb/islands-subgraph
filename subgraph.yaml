@@ -10,7 +10,7 @@ dataSources:
     source:
       address: "0xf8163EaC4c0239a81a7d8BD05B8e14498a5fD880"
       abi: KodiakIslandWithRouter
-      startBlock: 150101
+      startBlock: 266317
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -37,7 +37,7 @@ dataSources:
     source:
       address: "0xfb8283E50c89e367674BC566db3070D9e9Ff2fDd"
       abi: YieldToken
-      startBlock: 150101
+      startBlock: 237830
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -57,7 +57,7 @@ dataSources:
     source:
       address: "0x1d5224Aff66EbB2Cf46De98f69A5982f650F098c"
       abi: KodiakIslandWithRouter
-      startBlock: 150101
+      startBlock: 265911
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -104,7 +104,7 @@ dataSources:
     source:
       address: "0xadD169f7E0905fb2e78cDFBee155c975Db0F2cbe"
       abi: KodiakIslandWithRouter
-      startBlock: 150101
+      startBlock: 265950
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -131,7 +131,7 @@ dataSources:
     source:
       address: "0x89b37108D3eb174673D98f0a5bb419f47270130e"
       abi: YieldToken
-      startBlock: 150101
+      startBlock: 195860
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
