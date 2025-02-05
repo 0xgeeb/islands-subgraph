@@ -250,8 +250,16 @@ export function handleRsethBalanceChange(ev: TransferEvent): void {
   const balanceResult: KodiakIslandWithRouter__getUnderlyingBalancesResult = island.getUnderlyingBalances()
   const balances: BigInt[] = [balanceResult.value0, balanceResult.value1]
   const totalIslandSupply: BigInt = island.totalSupply()
-  const balance0PerIsland = balances[0].div(totalIslandSupply)
-  const balance1PerIsland = balances[1].div(totalIslandSupply)
+  let balance0PerIsland: BigInt
+  let balance1PerIsland: BigInt
+  if(totalIslandSupply.equals(BigInt.fromI32(0))) {
+    balance0PerIsland = BigInt.fromI32(0)
+    balance1PerIsland = BigInt.fromI32(0)
+  }
+  else {
+    balance0PerIsland = balances[0].div(totalIslandSupply)
+    balance1PerIsland = balances[1].div(totalIslandSupply)
+  }
 
   let islandBalances: RsethIslandBalances | null = RsethIslandBalances.load('1')
   if(!islandBalances) {
@@ -268,8 +276,16 @@ export function handleUnibtcBalanceChange(ev: TransferEvent): void {
   const balanceResult: KodiakIslandWithRouter__getUnderlyingBalancesResult = island.getUnderlyingBalances()
   const balances: BigInt[] = [balanceResult.value0, balanceResult.value1]
   const totalIslandSupply: BigInt = island.totalSupply()
-  const balance0PerIsland = balances[0].div(totalIslandSupply)
-  const balance1PerIsland = balances[1].div(totalIslandSupply)
+  let balance0PerIsland: BigInt
+  let balance1PerIsland: BigInt
+  if(totalIslandSupply.equals(BigInt.fromI32(0))) {
+    balance0PerIsland = BigInt.fromI32(0)
+    balance1PerIsland = BigInt.fromI32(0)
+  }
+  else {
+    balance0PerIsland = balances[0].div(totalIslandSupply)
+    balance1PerIsland = balances[1].div(totalIslandSupply)
+  }
 
   let islandBalances: UnibtcIslandBalances | null = UnibtcIslandBalances.load('1')
   if(!islandBalances) {
@@ -286,8 +302,16 @@ export function handleSolvbtcBalanceChange(ev: TransferEvent): void {
   const balanceResult: KodiakIslandWithRouter__getUnderlyingBalancesResult = island.getUnderlyingBalances()
   const balances: BigInt[] = [balanceResult.value0, balanceResult.value1]
   const totalIslandSupply: BigInt = island.totalSupply()
-  const balance0PerIsland = balances[0].div(totalIslandSupply)
-  const balance1PerIsland = balances[1].div(totalIslandSupply)
+  let balance0PerIsland: BigInt
+  let balance1PerIsland: BigInt
+  if(totalIslandSupply.equals(BigInt.fromI32(0))) {
+    balance0PerIsland = BigInt.fromI32(0)
+    balance1PerIsland = BigInt.fromI32(0)
+  }
+  else {
+    balance0PerIsland = balances[0].div(totalIslandSupply)
+    balance1PerIsland = balances[1].div(totalIslandSupply)
+  }
 
   let islandBalances: SolvbtcIslandBalances | null = SolvbtcIslandBalances.load('1')
   if(!islandBalances) {
