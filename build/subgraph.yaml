@@ -5,49 +5,143 @@ schema:
   file: schema.graphql
 dataSources:
   - kind: ethereum/contract
-    name: KodiakIslandWithRouter
+    name: RsethKodiakIslandWithRouter
     network: berachain-mainnet
     source:
       address: "0xf8163EaC4c0239a81a7d8BD05B8e14498a5fD880"
       abi: KodiakIslandWithRouter
-      startBlock: 237830
+      startBlock: 150101
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
       language: wasm/assemblyscript
       entities:
-        - IslandHolder
-        - IslandBalances
+        - RsethIslandHolder
+        - RsethIslandBalances
       abis:
         - name: KodiakIslandWithRouter
-          file: KodiakIslandWithRouter/abis/KodiakIslandWithRouter.json
+          file: RsethKodiakIslandWithRouter/abis/KodiakIslandWithRouter.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,uint256)
-          handler: handleIslandTransfer
+          handler: handleRsethIslandTransfer
         - event: Minted(address,uint256,uint256,uint256,uint128)
-          handler: handleBalanceChange
+          handler: handleRsethBalanceChange
         - event: Burned(address,uint256,uint256,uint256,uint128)
-          handler: handleBalanceChange
+          handler: handleRsethBalanceChange
         - event: Rebalance(indexed address,int24,int24,uint128,uint128)
-          handler: handleBalanceChange
-      file: KodiakIslandWithRouter/KodiakIslandWithRouter.wasm
+          handler: handleRsethBalanceChange
+      file: RsethKodiakIslandWithRouter/RsethKodiakIslandWithRouter.wasm
   - kind: ethereum/contract
-    name: YieldToken
+    name: RsethYieldToken
     network: berachain-mainnet
     source:
       address: "0xfb8283E50c89e367674BC566db3070D9e9Ff2fDd"
       abi: YieldToken
-      startBlock: 237830
+      startBlock: 150101
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
       language: wasm/assemblyscript
       entities:
-        - YTHolder
+        - RsethYTHolder
       abis:
         - name: YieldToken
-          file: YieldToken/abis/YieldToken.json
+          file: RsethYieldToken/abis/YieldToken.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,uint256)
-          handler: handleYTTransfer
-      file: KodiakIslandWithRouter/KodiakIslandWithRouter.wasm
+          handler: handleRsethYTTransfer
+      file: RsethKodiakIslandWithRouter/RsethKodiakIslandWithRouter.wasm
+  - kind: ethereum/contract
+    name: UnibtcKodiakIslandWithRouter
+    network: berachain-mainnet
+    source:
+      address: "0x1d5224Aff66EbB2Cf46De98f69A5982f650F098c"
+      abi: KodiakIslandWithRouter
+      startBlock: 150101
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      entities:
+        - UnibtcIslandHolder
+        - UnibtcIslandBalances
+      abis:
+        - name: KodiakIslandWithRouter
+          file: UnibtcKodiakIslandWithRouter/abis/KodiakIslandWithRouter.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleUnibtcIslandTransfer
+        - event: Minted(address,uint256,uint256,uint256,uint128)
+          handler: handleUnibtcBalanceChange
+        - event: Burned(address,uint256,uint256,uint256,uint128)
+          handler: handleUnibtcBalanceChange
+        - event: Rebalance(indexed address,int24,int24,uint128,uint128)
+          handler: handleUnibtcBalanceChange
+      file: RsethKodiakIslandWithRouter/RsethKodiakIslandWithRouter.wasm
+  - kind: ethereum/contract
+    name: UnibtcYieldToken
+    network: berachain-mainnet
+    source:
+      address: "0x888d15E66b5eb410ea5Df520Fc46f030BBa31299"
+      abi: YieldToken
+      startBlock: 150101
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      entities:
+        - UnibtcYTHolder
+      abis:
+        - name: YieldToken
+          file: UnibtcYieldToken/abis/YieldToken.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleUnibtcYTTransfer
+      file: RsethKodiakIslandWithRouter/RsethKodiakIslandWithRouter.wasm
+  - kind: ethereum/contract
+    name: SolvbtcKodiakIslandWithRouter
+    network: berachain-mainnet
+    source:
+      address: "0xadD169f7E0905fb2e78cDFBee155c975Db0F2cbe"
+      abi: KodiakIslandWithRouter
+      startBlock: 150101
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      entities:
+        - SolvbtcIslandHolder
+        - SolvbtcIslandBalances
+      abis:
+        - name: KodiakIslandWithRouter
+          file: SolvbtcKodiakIslandWithRouter/abis/KodiakIslandWithRouter.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleSolvbtcIslandTransfer
+        - event: Minted(address,uint256,uint256,uint256,uint128)
+          handler: handleSolvbtcBalanceChange
+        - event: Burned(address,uint256,uint256,uint256,uint128)
+          handler: handleSolvbtcBalanceChange
+        - event: Rebalance(indexed address,int24,int24,uint128,uint128)
+          handler: handleSolvbtcBalanceChange
+      file: RsethKodiakIslandWithRouter/RsethKodiakIslandWithRouter.wasm
+  - kind: ethereum/contract
+    name: SolvbtcYieldToken
+    network: berachain-mainnet
+    source:
+      address: "0x89b37108D3eb174673D98f0a5bb419f47270130e"
+      abi: YieldToken
+      startBlock: 150101
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      entities:
+        - SolvbtcYTHolder
+      abis:
+        - name: YieldToken
+          file: SolvbtcYieldToken/abis/YieldToken.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleSolvbtcYTTransfer
+      file: RsethKodiakIslandWithRouter/RsethKodiakIslandWithRouter.wasm

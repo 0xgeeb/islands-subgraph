@@ -1,18 +1,60 @@
-type IslandHolder @entity
+type RsethIslandHolder @entity
 {
   id:                           ID!
   address:                      String!
   islandAmt:                    BigInt!
 }
 
-type YTHolder @entity
+type RsethYTHolder @entity
 {
   id:                           ID!
   address:                      String!
   ytAmt:                        BigInt!
 }
 
-type IslandBalances @entity
+type RsethIslandBalances @entity
+{
+  id:                           ID!
+  balance0:                     BigInt!
+  balance1:                     BigInt!
+}
+
+type UnibtcIslandHolder @entity
+{
+  id:                           ID!
+  address:                      String!
+  islandAmt:                    BigInt!
+}
+
+type UnibtcYTHolder @entity
+{
+  id:                           ID!
+  address:                      String!
+  ytAmt:                        BigInt!
+}
+
+type UnibtcIslandBalances @entity
+{
+  id:                           ID!
+  balance0:                     BigInt!
+  balance1:                     BigInt!
+}
+
+type SolvbtcIslandHolder @entity
+{
+  id:                           ID!
+  address:                      String!
+  islandAmt:                    BigInt!
+}
+
+type SolvbtcYTHolder @entity
+{
+  id:                           ID!
+  address:                      String!
+  ytAmt:                        BigInt!
+}
+
+type SolvbtcIslandBalances @entity
 {
   id:                           ID!
   balance0:                     BigInt!

@@ -5,10 +5,10 @@ schema:
   file: ./schema.graphql
 dataSources:
   - kind: ethereum/contract
-    name: KodiakIslandWithRouter
+    name: RsethKodiakIslandWithRouter
     network: {{ network }}
     source:
-      address: "{{ island_address }}"
+      address: "{{ rseth_island_address }}"
       abi: KodiakIslandWithRouter
       startBlock: {{ startBlock }}
     mapping:
@@ -16,26 +16,26 @@ dataSources:
       apiVersion: 0.0.5
       language: wasm/assemblyscript
       entities:
-        - IslandHolder
-        - IslandBalances
+        - RsethIslandHolder
+        - RsethIslandBalances
       abis:
         - name: KodiakIslandWithRouter
           file: ./abis/{{ island_file }}.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,uint256)
-          handler: handleIslandTransfer
+          handler: handleRsethIslandTransfer
         - event: Minted(address,uint256,uint256,uint256,uint128)
-          handler: handleBalanceChange
+          handler: handleRsethBalanceChange
         - event: Burned(address,uint256,uint256,uint256,uint128)
-          handler: handleBalanceChange
+          handler: handleRsethBalanceChange
         - event: Rebalance(indexed address,int24,int24,uint128,uint128)
-          handler: handleBalanceChange
+          handler: handleRsethBalanceChange
       file: ./src/mapping.ts
   - kind: ethereum/contract
-    name: YieldToken
+    name: RsethYieldToken
     network: {{ network }}
     source:
-      address: "{{ yt_address }}"
+      address: "{{ rseth_yt_address }}"
       abi: YieldToken
       startBlock: {{ startBlock }}
     mapping:
@@ -43,11 +43,105 @@ dataSources:
       apiVersion: 0.0.5
       language: wasm/assemblyscript
       entities:
-        - YTHolder
+        - RsethYTHolder
       abis:
         - name: YieldToken
           file: ./abis/{{ yt_file }}.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,uint256)
-          handler: handleYTTransfer
+          handler: handleRsethYTTransfer
+      file: ./src/mapping.ts
+  - kind: ethereum/contract
+    name: UnibtcKodiakIslandWithRouter
+    network: {{ network }}
+    source:
+      address: "{{ unibtc_island_address }}"
+      abi: KodiakIslandWithRouter
+      startBlock: {{ startBlock }}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - UnibtcIslandHolder
+        - UnibtcIslandBalances
+      abis:
+        - name: KodiakIslandWithRouter
+          file: ./abis/{{ island_file }}.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleUnibtcIslandTransfer
+        - event: Minted(address,uint256,uint256,uint256,uint128)
+          handler: handleUnibtcBalanceChange
+        - event: Burned(address,uint256,uint256,uint256,uint128)
+          handler: handleUnibtcBalanceChange
+        - event: Rebalance(indexed address,int24,int24,uint128,uint128)
+          handler: handleUnibtcBalanceChange
+      file: ./src/mapping.ts
+  - kind: ethereum/contract
+    name: UnibtcYieldToken
+    network: {{ network }}
+    source:
+      address: "{{ unibtc_yt_address }}"
+      abi: YieldToken
+      startBlock: {{ startBlock }}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - UnibtcYTHolder
+      abis:
+        - name: YieldToken
+          file: ./abis/{{ yt_file }}.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleUnibtcYTTransfer
+      file: ./src/mapping.ts
+  - kind: ethereum/contract
+    name: SolvbtcKodiakIslandWithRouter
+    network: {{ network }}
+    source:
+      address: "{{ solvbtc_island_address }}"
+      abi: KodiakIslandWithRouter
+      startBlock: {{ startBlock }}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - SolvbtcIslandHolder
+        - SolvbtcIslandBalances
+      abis:
+        - name: KodiakIslandWithRouter
+          file: ./abis/{{ island_file }}.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleSolvbtcIslandTransfer
+        - event: Minted(address,uint256,uint256,uint256,uint128)
+          handler: handleSolvbtcBalanceChange
+        - event: Burned(address,uint256,uint256,uint256,uint128)
+          handler: handleSolvbtcBalanceChange
+        - event: Rebalance(indexed address,int24,int24,uint128,uint128)
+          handler: handleSolvbtcBalanceChange
+      file: ./src/mapping.ts
+  - kind: ethereum/contract
+    name: SolvbtcYieldToken
+    network: {{ network }}
+    source:
+      address: "{{ solvbtc_yt_address }}"
+      abi: YieldToken
+      startBlock: {{ startBlock }}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - SolvbtcYTHolder
+      abis:
+        - name: YieldToken
+          file: ./abis/{{ yt_file }}.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleSolvbtcYTTransfer
       file: ./src/mapping.ts

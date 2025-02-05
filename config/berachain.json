@@ -1,8 +1,12 @@
 {
   "network": "berachain-mainnet",
-  "island_address": "0xf8163EaC4c0239a81a7d8BD05B8e14498a5fD880",
-  "yt_address": "0xfb8283E50c89e367674BC566db3070D9e9Ff2fDd",
-  "startBlock": 237830,
   "island_file": "KodiakIslandWithRouter",
-  "yt_file": "YieldToken"
+  "yt_file": "YieldToken",
+  "startBlock": 150101,
+  "rseth_island_address": "0xf8163EaC4c0239a81a7d8BD05B8e14498a5fD880",
+  "rseth_yt_address": "0xfb8283E50c89e367674BC566db3070D9e9Ff2fDd",
+  "unibtc_island_address": "0x1d5224Aff66EbB2Cf46De98f69A5982f650F098c",
+  "unibtc_yt_address": "0x888d15E66b5eb410ea5Df520Fc46f030BBa31299",
+  "solvbtc_island_address": "0xadD169f7E0905fb2e78cDFBee155c975Db0F2cbe",
+  "solvbtc_yt_address": "0x89b37108D3eb174673D98f0a5bb419f47270130e"
 }

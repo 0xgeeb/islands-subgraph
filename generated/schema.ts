@@ -11,7 +11,7 @@ import {
   BigDecimal
 } from "@graphprotocol/graph-ts";
 
-export class IslandHolder extends Entity {
+export class RsethIslandHolder extends Entity {
   constructor(id: string) {
     super();
     this.set("id", Value.fromString(id));
@@ -19,24 +19,26 @@ export class IslandHolder extends Entity {
 
   save(): void {
     let id = this.get("id");
-    assert(id != null, "Cannot save IslandHolder entity without an ID");
+    assert(id != null, "Cannot save RsethIslandHolder entity without an ID");
     if (id) {
       assert(
         id.kind == ValueKind.STRING,
-        `Entities of type IslandHolder must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+        `Entities of type RsethIslandHolder must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
       );
-      store.set("IslandHolder", id.toString(), this);
+      store.set("RsethIslandHolder", id.toString(), this);
     }
   }
 
-  static loadInBlock(id: string): IslandHolder | null {
-    return changetype<IslandHolder | null>(
-      store.get_in_block("IslandHolder", id)
+  static loadInBlock(id: string): RsethIslandHolder | null {
+    return changetype<RsethIslandHolder | null>(
+      store.get_in_block("RsethIslandHolder", id)
     );
   }
 
-  static load(id: string): IslandHolder | null {
-    return changetype<IslandHolder | null>(store.get("IslandHolder", id));
+  static load(id: string): RsethIslandHolder | null {
+    return changetype<RsethIslandHolder | null>(
+      store.get("RsethIslandHolder", id)
+    );
   }
 
   get id(): string {
@@ -79,7 +81,7 @@ export class IslandHolder extends Entity {
   }
 }
 
-export class YTHolder extends Entity {
+export class RsethYTHolder extends Entity {
   constructor(id: string) {
     super();
     this.set("id", Value.fromString(id));
@@ -87,22 +89,24 @@ export class YTHolder extends Entity {
 
   save(): void {
     let id = this.get("id");
-    assert(id != null, "Cannot save YTHolder entity without an ID");
+    assert(id != null, "Cannot save RsethYTHolder entity without an ID");
     if (id) {
       assert(
         id.kind == ValueKind.STRING,
-        `Entities of type YTHolder must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+        `Entities of type RsethYTHolder must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
       );
-      store.set("YTHolder", id.toString(), this);
+      store.set("RsethYTHolder", id.toString(), this);
     }
   }
 
-  static loadInBlock(id: string): YTHolder | null {
-    return changetype<YTHolder | null>(store.get_in_block("YTHolder", id));
+  static loadInBlock(id: string): RsethYTHolder | null {
+    return changetype<RsethYTHolder | null>(
+      store.get_in_block("RsethYTHolder", id)
+    );
   }
 
-  static load(id: string): YTHolder | null {
-    return changetype<YTHolder | null>(store.get("YTHolder", id));
+  static load(id: string): RsethYTHolder | null {
+    return changetype<RsethYTHolder | null>(store.get("RsethYTHolder", id));
   }
 
   get id(): string {
@@ -145,7 +149,7 @@ export class YTHolder extends Entity {
   }
 }
 
-export class IslandBalances extends Entity {
+export class RsethIslandBalances extends Entity {
   constructor(id: string) {
     super();
     this.set("id", Value.fromString(id));
@@ -153,24 +157,445 @@ export class IslandBalances extends Entity {
 
   save(): void {
     let id = this.get("id");
-    assert(id != null, "Cannot save IslandBalances entity without an ID");
+    assert(id != null, "Cannot save RsethIslandBalances entity without an ID");
     if (id) {
       assert(
         id.kind == ValueKind.STRING,
-        `Entities of type IslandBalances must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+        `Entities of type RsethIslandBalances must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
       );
-      store.set("IslandBalances", id.toString(), this);
+      store.set("RsethIslandBalances", id.toString(), this);
     }
   }
 
-  static loadInBlock(id: string): IslandBalances | null {
-    return changetype<IslandBalances | null>(
-      store.get_in_block("IslandBalances", id)
+  static loadInBlock(id: string): RsethIslandBalances | null {
+    return changetype<RsethIslandBalances | null>(
+      store.get_in_block("RsethIslandBalances", id)
     );
   }
 
-  static load(id: string): IslandBalances | null {
-    return changetype<IslandBalances | null>(store.get("IslandBalances", id));
+  static load(id: string): RsethIslandBalances | null {
+    return changetype<RsethIslandBalances | null>(
+      store.get("RsethIslandBalances", id)
+    );
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toString();
+    }
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get balance0(): BigInt {
+    let value = this.get("balance0");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set balance0(value: BigInt) {
+    this.set("balance0", Value.fromBigInt(value));
+  }
+
+  get balance1(): BigInt {
+    let value = this.get("balance1");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set balance1(value: BigInt) {
+    this.set("balance1", Value.fromBigInt(value));
+  }
+}
+
+export class UnibtcIslandHolder extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save UnibtcIslandHolder entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        `Entities of type UnibtcIslandHolder must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+      );
+      store.set("UnibtcIslandHolder", id.toString(), this);
+    }
+  }
+
+  static loadInBlock(id: string): UnibtcIslandHolder | null {
+    return changetype<UnibtcIslandHolder | null>(
+      store.get_in_block("UnibtcIslandHolder", id)
+    );
+  }
+
+  static load(id: string): UnibtcIslandHolder | null {
+    return changetype<UnibtcIslandHolder | null>(
+      store.get("UnibtcIslandHolder", id)
+    );
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toString();
+    }
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get address(): string {
+    let value = this.get("address");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toString();
+    }
+  }
+
+  set address(value: string) {
+    this.set("address", Value.fromString(value));
+  }
+
+  get islandAmt(): BigInt {
+    let value = this.get("islandAmt");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set islandAmt(value: BigInt) {
+    this.set("islandAmt", Value.fromBigInt(value));
+  }
+}
+
+export class UnibtcYTHolder extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save UnibtcYTHolder entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        `Entities of type UnibtcYTHolder must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+      );
+      store.set("UnibtcYTHolder", id.toString(), this);
+    }
+  }
+
+  static loadInBlock(id: string): UnibtcYTHolder | null {
+    return changetype<UnibtcYTHolder | null>(
+      store.get_in_block("UnibtcYTHolder", id)
+    );
+  }
+
+  static load(id: string): UnibtcYTHolder | null {
+    return changetype<UnibtcYTHolder | null>(store.get("UnibtcYTHolder", id));
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toString();
+    }
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get address(): string {
+    let value = this.get("address");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toString();
+    }
+  }
+
+  set address(value: string) {
+    this.set("address", Value.fromString(value));
+  }
+
+  get ytAmt(): BigInt {
+    let value = this.get("ytAmt");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set ytAmt(value: BigInt) {
+    this.set("ytAmt", Value.fromBigInt(value));
+  }
+}
+
+export class UnibtcIslandBalances extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save UnibtcIslandBalances entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        `Entities of type UnibtcIslandBalances must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+      );
+      store.set("UnibtcIslandBalances", id.toString(), this);
+    }
+  }
+
+  static loadInBlock(id: string): UnibtcIslandBalances | null {
+    return changetype<UnibtcIslandBalances | null>(
+      store.get_in_block("UnibtcIslandBalances", id)
+    );
+  }
+
+  static load(id: string): UnibtcIslandBalances | null {
+    return changetype<UnibtcIslandBalances | null>(
+      store.get("UnibtcIslandBalances", id)
+    );
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toString();
+    }
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get balance0(): BigInt {
+    let value = this.get("balance0");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set balance0(value: BigInt) {
+    this.set("balance0", Value.fromBigInt(value));
+  }
+
+  get balance1(): BigInt {
+    let value = this.get("balance1");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set balance1(value: BigInt) {
+    this.set("balance1", Value.fromBigInt(value));
+  }
+}
+
+export class SolvbtcIslandHolder extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save SolvbtcIslandHolder entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        `Entities of type SolvbtcIslandHolder must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+      );
+      store.set("SolvbtcIslandHolder", id.toString(), this);
+    }
+  }
+
+  static loadInBlock(id: string): SolvbtcIslandHolder | null {
+    return changetype<SolvbtcIslandHolder | null>(
+      store.get_in_block("SolvbtcIslandHolder", id)
+    );
+  }
+
+  static load(id: string): SolvbtcIslandHolder | null {
+    return changetype<SolvbtcIslandHolder | null>(
+      store.get("SolvbtcIslandHolder", id)
+    );
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toString();
+    }
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get address(): string {
+    let value = this.get("address");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toString();
+    }
+  }
+
+  set address(value: string) {
+    this.set("address", Value.fromString(value));
+  }
+
+  get islandAmt(): BigInt {
+    let value = this.get("islandAmt");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set islandAmt(value: BigInt) {
+    this.set("islandAmt", Value.fromBigInt(value));
+  }
+}
+
+export class SolvbtcYTHolder extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save SolvbtcYTHolder entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        `Entities of type SolvbtcYTHolder must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+      );
+      store.set("SolvbtcYTHolder", id.toString(), this);
+    }
+  }
+
+  static loadInBlock(id: string): SolvbtcYTHolder | null {
+    return changetype<SolvbtcYTHolder | null>(
+      store.get_in_block("SolvbtcYTHolder", id)
+    );
+  }
+
+  static load(id: string): SolvbtcYTHolder | null {
+    return changetype<SolvbtcYTHolder | null>(store.get("SolvbtcYTHolder", id));
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toString();
+    }
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get address(): string {
+    let value = this.get("address");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toString();
+    }
+  }
+
+  set address(value: string) {
+    this.set("address", Value.fromString(value));
+  }
+
+  get ytAmt(): BigInt {
+    let value = this.get("ytAmt");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set ytAmt(value: BigInt) {
+    this.set("ytAmt", Value.fromBigInt(value));
+  }
+}
+
+export class SolvbtcIslandBalances extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(
+      id != null,
+      "Cannot save SolvbtcIslandBalances entity without an ID"
+    );
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        `Entities of type SolvbtcIslandBalances must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+      );
+      store.set("SolvbtcIslandBalances", id.toString(), this);
+    }
+  }
+
+  static loadInBlock(id: string): SolvbtcIslandBalances | null {
+    return changetype<SolvbtcIslandBalances | null>(
+      store.get_in_block("SolvbtcIslandBalances", id)
+    );
+  }
+
+  static load(id: string): SolvbtcIslandBalances | null {
+    return changetype<SolvbtcIslandBalances | null>(
+      store.get("SolvbtcIslandBalances", id)
+    );
   }
 
   get id(): string {
