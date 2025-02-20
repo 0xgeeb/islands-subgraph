@@ -145,3 +145,50 @@ dataSources:
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleSolvbtcYTTransfer
       file: ./src/mapping.ts
+  - kind: ethereum/contract
+    name: ICHIVault
+    network: {{ network }}
+    source:
+      address: "{{ rusd_vault_address }}"
+      abi: ICHIVault
+      startBlock: {{ rusd_vault_startBlock }}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - RusdVaultHolder
+        - RusdVaultBalances
+      abis:
+        - name: ICHIVault
+          file: ./abis/{{ vault_file }}.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleRusdVaultTransfer
+        - event: Deposit(indexed address,indexed address,uint256,uint256,uint256)
+          handler: handleRusdBalanceChange
+        - event: Withdraw(indexed address,indexed address,uint256,uint256,uint256)
+          handler: handleRusdBalanceChange
+        - event: Rebalance(int24,uint256,uint256,uint256,uint256,uint256)
+          handler: handleRusdBalanceChange
+      file: ./src/mapping.ts
+  - kind: ethereum/contract
+    name: RusdYieldToken
+    network: {{ network }}
+    source:
+      address: "{{ rusd_yt_address }}"
+      abi: YieldToken
+      startBlock: {{ rusd_yt_startBlock }}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - RusdYTHolder
+      abis:
+        - name: YieldToken
+          file: ./abis/{{ yt_file }}.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleRusdYTTransfer
+      file: ./src/mapping.ts

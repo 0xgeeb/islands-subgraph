@@ -60,3 +60,24 @@ type SolvbtcIslandBalances @entity
   balance0:                     BigInt!
   balance1:                     BigInt!
 }
+
+type RusdVaultHolder @entity
+{
+  id:                           ID!
+  address:                      String!
+  vaultAmt:                     BigInt!
+}
+
+type RusdYTHolder @entity
+{
+  id:                           ID!
+  address:                      String!
+  ytAmt:                        BigInt!
+}
+
+type RusdVaultBalances @entity
+{
+  id:                           ID!
+  balance0:                     BigInt!
+  balance1:                     BigInt!
+}

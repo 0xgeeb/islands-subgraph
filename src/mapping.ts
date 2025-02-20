@@ -1,6 +1,8 @@
 import { BigInt } from '@graphprotocol/graph-ts'
 import { KodiakIslandWithRouter__getUnderlyingBalancesResult, Transfer as TransferEvent } from '../generated/KodiakIslandWithRouter/KodiakIslandWithRouter'
 import { KodiakIslandWithRouter } from "../generated/KodiakIslandWithRouter/KodiakIslandWithRouter"
+import { ICHIVault__getTotalAmountsResult } from "../generated/ICHIVault/ICHIVault"
+import { ICHIVault } from "../generated/ICHIVault/ICHIVault"
 import {
   RsethIslandHolder,
   RsethYTHolder,
@@ -11,6 +13,9 @@ import {
   SolvbtcIslandHolder,
   SolvbtcYTHolder,
   SolvbtcIslandBalances,
+  RusdVaultHolder,
+  RusdYTHolder,
+  RusdVaultBalances
 } from '../generated/schema'
 
 const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000'
@@ -131,6 +136,44 @@ export function handleSolvbtcIslandTransfer(ev: TransferEvent): void {
   }
 }
 
+export function handleRusdVaultTransfer(ev: TransferEvent): void {
+  const from = ev.params.from.toHex()
+  const to = ev.params.to.toHex()
+  const amt: BigInt = ev.params.amount
+
+  if(from != ZERO_ADDRESS) {
+    let prevVaultAmt: BigInt
+    let holder: RusdVaultHolder | null = RusdVaultHolder.load(from)
+    if(!holder) {
+      holder = new RusdVaultHolder(from)
+      prevVaultAmt = BigInt.fromI32(0)
+    }
+    else {
+      prevVaultAmt = holder.vaultAmt
+    }
+  
+    holder.address = from
+    holder.vaultAmt = prevVaultAmt.minus(amt)
+    holder.save()
+  }
+
+  if(to != ZERO_ADDRESS) {
+    let prevVaultAmt: BigInt
+    let holder: RusdVaultHolder | null = RusdVaultHolder.load(to)
+    if(!holder) {
+      holder = new RusdVaultHolder(to)
+      prevVaultAmt = BigInt.fromI32(0)
+    }
+    else {
+      prevVaultAmt = holder.vaultAmt
+    }
+
+    holder.address = to
+    holder.vaultAmt = prevVaultAmt.plus(amt)
+    holder.save()
+  }
+}
+
 export function handleRsethYTTransfer(ev: TransferEvent): void {
   const from = ev.params.from.toHex()
   const to = ev.params.to.toHex()
@@ -245,6 +288,44 @@ export function handleSolvbtcYTTransfer(ev: TransferEvent): void {
   }
 }
 
+export function handleRusdYTTransfer(ev: TransferEvent): void {
+  const from = ev.params.from.toHex()
+  const to = ev.params.to.toHex()
+  const amt: BigInt = ev.params.amount
+
+  if(from != ZERO_ADDRESS) {
+    let prevytAmt: BigInt
+    let holder: RusdYTHolder | null = RusdYTHolder.load(from)
+    if(!holder) {
+      holder = new RusdYTHolder(from)
+      prevytAmt = BigInt.fromI32(0)
+    }
+    else {
+      prevytAmt = holder.ytAmt
+    }
+
+    holder.address = from
+    holder.ytAmt = prevytAmt.minus(amt)
+    holder.save()
+  }
+
+  if(to != ZERO_ADDRESS) {
+    let prevytAmt: BigInt
+    let holder: RusdYTHolder | null = RusdYTHolder.load(to)
+    if(!holder) {
+      holder = new RusdYTHolder(to)
+      prevytAmt = BigInt.fromI32(0)
+    }
+    else {
+      prevytAmt = holder.ytAmt
+    }
+
+    holder.address = to
+    holder.ytAmt = prevytAmt.plus(amt)
+    holder.save()
+  }
+}
+
 export function handleRsethBalanceChange(ev: TransferEvent): void {
   const island = KodiakIslandWithRouter.bind(ev.address)
   const balanceResult: KodiakIslandWithRouter__getUnderlyingBalancesResult = island.getUnderlyingBalances()
@@ -321,4 +402,30 @@ export function handleSolvbtcBalanceChange(ev: TransferEvent): void {
   islandBalances.balance0 = balance0PerIsland
   islandBalances.balance1 = balance1PerIsland
   islandBalances.save()
+}
+
+export function handleRusdBalanceChange(ev: TransferEvent): void {
+  const vault = ICHIVault.bind(ev.address)
+  const amountsResult: ICHIVault__getTotalAmountsResult = vault.getTotalAmounts()
+  const amounts: BigInt[] = [amountsResult.value0, amountsResult.value1]
+  const totalVaultSupply: BigInt = vault.totalSupply()
+  let balance0PerVault: BigInt
+  let balance1PerVault: BigInt
+  if(totalVaultSupply.equals(BigInt.fromI32(0))) {
+    balance0PerVault = BigInt.fromI32(0)
+    balance1PerVault = BigInt.fromI32(0)
+  }
+  else {
+    balance0PerVault = amounts[0].div(totalVaultSupply)
+    balance1PerVault = amounts[1].div(totalVaultSupply)
+  }
+
+  let vaultBalances: RusdVaultBalances | null = RusdVaultBalances.load('1')
+  if(!vaultBalances) {
+    vaultBalances = new RusdVaultBalances('1')
+  }
+
+  vaultBalances.balance0 = balance0PerVault
+  vaultBalances.balance1 = balance1PerVault
+  vaultBalances.save()
 }
